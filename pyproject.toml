@@ -8,8 +8,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.9"
 
-
-
 [tool.commitizen]
 name = "cz_conventional_commits"
 tag_format = "v$version"

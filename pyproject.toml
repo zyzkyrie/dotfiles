@@ -17,8 +17,8 @@ update_changelog_on_bump = true
 major_version_zero = true
 
 bump_message = "bump: release version $current_version -> $new_version"
-bump_pattern = "^(feat|fix|perf|refactor|chore|docs|style|test)"
-bump_map = { "feat" = "MINOR", "fix" = "PATCH", "perf" = "PATCH", "refactor" = "PATCH", "chore" = "PATCH", "docs" = "PATCH", "style" = "PATCH", "test" = "PATCH" }
+bump_pattern = "^(feat|fix|docs|style|refactor|perf|test|chore)(\\(.+\\))?: "
+bump_map = { "feat" = "MINOR", "fix" = "PATCH", "perf" = "PATCH", "docs" = "PATCH", "style" = "PATCH", "refactor" = "PATCH", "test" = "PATCH", "chore" = "PATCH" }
 
 changelog_file = "CHANGELOG.md"
 changelog_incremental = true

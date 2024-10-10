@@ -17,6 +17,15 @@ version_scheme = "pep440"
 version_provider = "poetry"
 update_changelog_on_bump = true
 major_version_zero = true
+
+bump_message = "bump: release version $current_version -> $new_version"
+bump_pattern = "^(feat|fix|docs|style|refactor|perf|test)"
+bump_map = { "feat" = "minor", "fix" = "patch", "docs" = "patch", "style" = "patch", "refactor" = "patch", "perf" = "patch", "test" = "patch"}
+
+changelog_file = "CHANGELOG.md"
+changelog_incremental = true
+changelog_start_rev = "v0.1.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

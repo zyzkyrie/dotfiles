@@ -1,0 +1,43 @@
+name: Main Branch Update
+on:
+  push:
+    branches:
+      - main
+jobs:
+  update-version-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+      - name: Install dependencies
+        run: |
+          poetry install
+      - name: Install Commitizen
+        run: |
+          poetry add commitizen
+      - name: Configure Git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+      - name: Update version and generate changelog
+        run: |
+          poetry run cz bump --yes
+      - name: Push changes to main
+        run: |
+          git push --follow-tags origin main
+      - name: Sync main to dev
+        run: |
+          git checkout dev
+          git merge --strategy-option theirs --no-commit origin/main
+          git commit -m "chore: Sync main to dev" || true
+          git push origin dev
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
